@@ -1,0 +1,28 @@
+### Rejestracja nowego użytkownika
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+###
+
+### Logowanie – uzyskanie tokenu JWT
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+###
+### Wywołanie chronionego endpointu z tokenem
+GET http://localhost:8080/api/test/hello
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0NjE5MzA3MywiZXhwIjoxNzQ2Mjc5NDczfQ.sWhKp7BL8_0PiptyqAbFDSNMxM9JZo1QUFqPrPfEpJ0
+
+
+### Test wysyłki maila
+GET http://localhost:8080/api/test/send
