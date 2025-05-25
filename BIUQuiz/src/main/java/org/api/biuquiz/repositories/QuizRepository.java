@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface QuizRepository extends JpaRepository<Quiz, Long> {
     List<Quiz> findByCreatedBy(String username);
     Optional<Quiz> findByIdAndCreatedBy(Long id, String username);
-
+    void deleteById(Long id);
 }

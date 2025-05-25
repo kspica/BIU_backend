@@ -39,7 +39,7 @@ public class PasswordResetService {
         PasswordResetToken resetToken = new PasswordResetToken(null, token, expiration, user);
         tokenRepo.save(resetToken);
 
-        String link = "http://localhost:3000/reset-password?token=" + token;
+        String link = "http://localhost:3001/reset-password?token=" + token;
         emailService.send(email, "Resetowanie hasła", "Kliknij link: " + link);
     }
 

@@ -1,5 +1,6 @@
 package org.api.biuquiz.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.api.biuquiz.models.Question;
 import org.api.biuquiz.models.Quiz;
 import org.api.biuquiz.models.User;
@@ -62,5 +63,26 @@ public class QuizService {
         return quizRepo.findByIdAndCreatedBy(id, username);
     }
 
+    public void deleteById(Long quizId) {
+        quizRepo.deleteById(quizId);
+    }
+
+
+    public void updateQuiz(Long id, Quiz updatedData) {
+        Quiz quiz = quizRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Quiz not found"));
+
+        quiz.setDescription(updatedData.getDescription());
+        quiz.setCategory(updatedData.getCategory());
+        quiz.setDifficulty(updatedData.getDifficulty());
+
+        quiz.getQuestions().clear();
+        for (Question question : updatedData.getQuestions()) {
+            question.setQuiz(quiz);
+            quiz.getQuestions().add(question);
+        }
+
+        quizRepo.save(quiz);
+    }
 }
 
