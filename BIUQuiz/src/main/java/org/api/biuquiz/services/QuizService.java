@@ -7,12 +7,15 @@ import org.api.biuquiz.models.User;
 import org.api.biuquiz.models.dto.CreateQuizRequest;
 import org.api.biuquiz.repositories.QuizRepository;
 import org.api.biuquiz.repositories.UserRepository;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.api.biuquiz.specifications.QuizSpecifications.*;
 
 @Service
 public class QuizService {
@@ -59,6 +62,11 @@ public class QuizService {
         return quizRepo.findByCreatedBy(user.getUsername());
     }
 
+    public List<Quiz> getAllQuizzes() {
+        return quizRepo.findAll();
+    }
+
+
     public Optional<Quiz> findByIdAndUsername(Long id, String username) {
         return quizRepo.findByIdAndCreatedBy(id, username);
     }
@@ -83,6 +91,16 @@ public class QuizService {
         }
 
         quizRepo.save(quiz);
+    }
+
+    public List<Quiz> search(String title, String category, String difficulty, Integer timeLimit) {
+        Specification<Quiz> spec = Specification
+                .where(titleContains(title))
+                .and(categoryEquals(category))
+                .and(difficultyEquals(difficulty))
+                .and(timeLimitEquals(timeLimit));
+
+        return quizRepo.findAll(spec);
     }
 }
 

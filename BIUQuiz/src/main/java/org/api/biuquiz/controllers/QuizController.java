@@ -23,6 +23,11 @@ public class QuizController {
         this.quizService = quizService;
     }
 
+    @GetMapping
+    public List<Quiz> getAllQuizzes() {
+        return quizService.getAllQuizzes();
+    }
+
     @GetMapping("/user")
     public List<Quiz> getUserQuizzes(Principal principal) {
         return quizService.getQuizzesByUsername(principal.getName());
@@ -33,6 +38,16 @@ public class QuizController {
         Optional<Quiz> quiz = quizService.findByIdAndUsername(id, principal.getName());
         return quiz.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.FORBIDDEN).build());
+    }
+
+    @GetMapping("/search")
+    public List<Quiz> searchQuizzes(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String difficulty,
+            @RequestParam(required = false) Integer timeLimit
+    ) {
+        return quizService.search(title, category, difficulty, timeLimit);
     }
 
 
