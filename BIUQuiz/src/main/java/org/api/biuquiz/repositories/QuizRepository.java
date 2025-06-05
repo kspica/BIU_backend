@@ -9,6 +9,11 @@ import java.util.Optional;
 
 public interface QuizRepository extends JpaRepository<Quiz, Long>, JpaSpecificationExecutor<Quiz> {
     List<Quiz> findByCreatedBy(String username);
+
     Optional<Quiz> findByIdAndCreatedBy(Long id, String username);
+
     void deleteById(Long id);
+
+    List<Quiz> findTop3ByCategoryInOrderByIdDesc(List<String> categories);
+
 }
