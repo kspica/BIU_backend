@@ -27,5 +27,7 @@ public class QuizResult {
 
     @ManyToOne
     private Quiz quiz;
+
+    private Long tournamentId;
 }
 

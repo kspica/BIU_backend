@@ -103,4 +103,3 @@ public class QuizService {
         return quizRepo.findAll(spec);
     }
 }
-

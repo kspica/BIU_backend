@@ -7,5 +7,6 @@ public class SubmitResultRequest {
     private Long quizId;
     private int score;
     private int timeTakenSeconds;
+    private Long tournamentId;
 }
 

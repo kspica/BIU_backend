@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface QuizResultRepository extends JpaRepository<QuizResult, Long> {
     List<QuizResult> findTop10ByQuizIdOrderByScoreDescTimeTakenSecondsAsc(Long quizId);
+
+    List<QuizResult> findByTournamentIdOrderByScoreDesc(Long tournamentId);
 }
 

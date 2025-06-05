@@ -30,7 +30,8 @@ public class QuizController {
 
     @GetMapping("/user")
     public List<Quiz> getUserQuizzes(Principal principal) {
-        return quizService.getQuizzesByUsername(principal.getName());
+        return quizService.getAllQuizzes();
+//        return quizService.getQuizzesByUsername(principal.getName());
     }
 
     @GetMapping("/{id}")
@@ -74,4 +75,3 @@ public class QuizController {
         }
     }
 }
-

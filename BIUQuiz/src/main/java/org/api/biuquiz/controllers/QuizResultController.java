@@ -1,8 +1,8 @@
 package org.api.biuquiz.controllers;
 
+import org.api.biuquiz.models.Quiz;
 import org.api.biuquiz.models.QuizResult;
 import org.api.biuquiz.models.User;
-import org.api.biuquiz.models.Quiz;
 import org.api.biuquiz.models.dto.SubmitResultRequest;
 import org.api.biuquiz.repositories.QuizRepository;
 import org.api.biuquiz.repositories.QuizResultRepository;
@@ -45,6 +45,7 @@ public class QuizResultController {
                 .user(user)
                 .score(request.getScore())
                 .timeTakenSeconds(request.getTimeTakenSeconds())
+                .tournamentId(request.getTournamentId())
                 .completedAt(LocalDateTime.now())
                 .build();
 
